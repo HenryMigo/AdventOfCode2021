@@ -19,4 +19,8 @@
       <None Remove="AdventOfCode2021.Core\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="AdventOfCode2021.Core\AdventOfCode2021.Core.csproj" />
+    </ItemGroup>
+
 </Project>
