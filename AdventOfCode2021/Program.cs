@@ -8,32 +8,16 @@ var dayOneData = FileHelper.ReadFile($"{filePath}DayOne.txt");
 
 var oneData = dayOneData as int[] ?? dayOneData.ToArray();
 
-int? previousValue = null;
-int increaseCount = 0;
-int decreaseCount = 0;
+var dayOnePartOneResults = dayOne.PartOne(oneData);
 
-for (var i = 0; i < oneData.Count(); i++)
-{
-    if (previousValue == null)
-    {
-        Console.WriteLine($"{oneData[i]} (N/A - no previous measurement)");
-    }
-    else
-    {
-        if (previousValue < oneData[i])
-        {
-            increaseCount++;
-        }
-        else if (previousValue > oneData[i])
-        {
-            decreaseCount++;
-        }
-    }
+Console.WriteLine("Day One - Part one:");
+Console.WriteLine($"Increased: {dayOnePartOneResults.Item1}");
+Console.WriteLine($"Decreased: {dayOnePartOneResults.Item2}");
 
-    previousValue = oneData[i];
-}
+var dayOnePartTwoResults = dayOne.PartTwo(oneData);
 
-Console.WriteLine($"Increased: {increaseCount}");
-Console.WriteLine($"Decreased: {decreaseCount}");
+Console.WriteLine("Day One - Part two:");
+Console.WriteLine($"Increased: {dayOnePartTwoResults.Item1}");
+Console.WriteLine($"Decreased: {dayOnePartTwoResults.Item2}");
 
 Console.ReadLine();
