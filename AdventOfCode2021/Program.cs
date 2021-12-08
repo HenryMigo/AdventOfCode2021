@@ -22,15 +22,7 @@ Console.WriteLine($"Decreased: {dayOnePartTwoResults.Item2}");
 
 var dayTwo = new DayTwo();
 var dayTwoData = FileHelper.ReadFileToStringList($"{filePath}DayTwo.txt");
-var dayTwoItems = new List<DayTwoModel>();
-
-foreach (var data in dayTwoData)
-{
-    var items = data.Split(' ');
-    
-    dayTwoItems.Add(new DayTwoModel(items[0], int.Parse(items[1])));
-}
-
+var dayTwoItems = dayTwo.ConvertToModels(dayTwoData);
 var dayTwoPartOneResult = dayTwo.PartOne(dayTwoItems);
 
 Console.WriteLine("Day Two - Part one:");
@@ -40,5 +32,17 @@ var dayTwoPartTwoResult = dayTwo.PartTwo(dayTwoItems);
 
 Console.WriteLine("Day Two - Part two:");
 Console.WriteLine($"{dayTwoPartTwoResult}");
+
+var dayThree = new DayThree();
+var dayThreeData = FileHelper.ReadFileToStringList($"{filePath}DayThree.txt");
+var dayThreePartOneResult = dayThree.PartOne(dayThreeData);
+
+Console.WriteLine("Day Three - Part one:");
+Console.WriteLine($"{dayThreePartOneResult}");
+
+var dayThreePartTwoResult = dayThree.PartTwo(dayThreeData);
+
+Console.WriteLine("Day Three - Part two:");
+Console.WriteLine($"{dayThreePartTwoResult}");
 
 Console.ReadLine();

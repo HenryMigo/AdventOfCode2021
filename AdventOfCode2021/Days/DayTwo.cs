@@ -6,7 +6,7 @@ public class DayTwo
     {
         var horizontal = 0;
         var depth = 0;
-        
+
         foreach (var command in input)
         {
             switch (command.Command)
@@ -24,13 +24,13 @@ public class DayTwo
         }
         return horizontal * depth;
     }
-    
+
     public int PartTwo(List<DayTwoModel> input)
     {
         var horizontal = 0;
         var depth = 0;
         var aim = 0;
-        
+
         foreach (var command in input)
         {
             switch (command.Command)
@@ -48,6 +48,11 @@ public class DayTwo
             }
         }
         return horizontal * depth;
+    }
+
+    public List<DayTwoModel> ConvertToModels(IEnumerable<string> dayTwoData)
+    {
+        return dayTwoData.Select(data => data.Split(' ')).Select(items => new DayTwoModel(items[0], int.Parse(items[1]))).ToList();
     }
 }
 

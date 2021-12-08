@@ -23,4 +23,19 @@
       <ProjectReference Include="AdventOfCode2021.Core\AdventOfCode2021.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\Files\DayOne.txt">
+        <Link>Files\DayOne.txt</Link>
+      </Content>
+      <Content Include="..\Files\DayThree.txt">
+        <Link>Files\DayThree.txt</Link>
+      </Content>
+      <Content Include="..\Files\DayTwo.txt">
+        <Link>Files\DayTwo.txt</Link>
+      </Content>
+      <Content Include="..\Files\DayTwoExample.txt">
+        <Link>Files\DayTwoExample.txt</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>
