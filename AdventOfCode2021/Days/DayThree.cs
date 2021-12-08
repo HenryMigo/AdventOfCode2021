@@ -54,45 +54,29 @@ public class DayThree
 
         var dayThreeDataMost = threeData as string[] ?? threeData.ToArray();
         var dayThreeDataLeast = threeData as string[] ?? threeData.ToArray();
-        var length = dayThreeDataMost.ToArray()[0].Length;
 
-        for (var i = 0; i < length; i++)
-        {
-            var ones = 0;
-            var zeros = 0;
+        dayThreeDataMost = WorkOutPartTwo(dayThreeDataMost);
+        dayThreeDataLeast = WorkOutPartTwo(dayThreeDataLeast);
 
-            CalculateMostAndLeastCommon(dayThreeDataMost, i, ref ones, ref zeros);
+        mostCommonResult = dayThreeDataMost.Aggregate(mostCommonResult, (current, most) => current + most.ToString());
+        leastCommonResult = dayThreeDataLeast.Aggregate(leastCommonResult, (current, least) => current + least.ToString());
 
-            if (dayThreeDataMost.Length == 1)
-            {
-                break;
-            }
+        var mostAsBit = Convert.ToInt32(mostCommonResult, 2);
+        var leastAsBit = Convert.ToInt32(leastCommonResult, 2);
 
-            if (ones > zeros)
-            {
-                RemoveThoseNotInCriteria(ref dayThreeDataMost, i, '1');
-            }
+        return mostAsBit * leastAsBit;
+    }
 
-            if (zeros > ones)
-            {
-                RemoveThoseNotInCriteria(ref dayThreeDataMost, i, '0');
-            }
-
-            if (zeros == ones)
-            {
-                RemoveThoseNotInCriteria(ref dayThreeDataMost, i, '1');
-            }
-
-            length = dayThreeDataMost.ToArray()[0].Length;
-        }
-
+    private string[] WorkOutPartTwo(string[] dayThreeDataLeast)
+    {
+        int length;
         length = dayThreeDataLeast.ToArray()[0].Length;
         for (var i = 0; i < length; i++)
         {
             var ones = 0;
             var zeros = 0;
 
-            CalculateMostAndLeastCommon(dayThreeDataLeast, i, ref ones, ref zeros);
+            CalculateOnesAndZeros(dayThreeDataLeast, i, ref ones, ref zeros);
 
             if (dayThreeDataLeast.Length == 1)
             {
@@ -117,17 +101,10 @@ public class DayThree
             length = dayThreeDataLeast.ToArray()[0].Length;
         }
 
-        mostCommonResult = dayThreeDataMost.Aggregate(mostCommonResult, (current, most) => current + most.ToString());
-        leastCommonResult =
-            dayThreeDataLeast.Aggregate(leastCommonResult, (current, least) => current + least.ToString());
-
-        var mostAsBit = Convert.ToInt32(mostCommonResult, 2);
-        var leastAsBit = Convert.ToInt32(leastCommonResult, 2);
-
-        return mostAsBit * leastAsBit;
+        return dayThreeDataLeast;
     }
 
-    private void CalculateMostAndLeastCommon(IReadOnlyList<string> threeData, int i, ref int ones, ref int zeros)
+    private void CalculateOnesAndZeros(IReadOnlyList<string> threeData, int i, ref int ones, ref int zeros)
     {
         for (var y = 0; y < threeData.ToArray().Length; y++)
         {
