@@ -24,6 +24,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="..\Files\DayFour.txt">
+        <Link>Files\DayFour.txt</Link>
+      </Content>
       <Content Include="..\Files\DayOne.txt">
         <Link>Files\DayOne.txt</Link>
       </Content>

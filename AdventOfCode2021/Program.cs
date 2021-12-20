@@ -45,4 +45,16 @@ var dayThreePartTwoResult = dayThree.PartTwo(dayThreeData);
 Console.WriteLine("Day Three - Part two:");
 Console.WriteLine($"{dayThreePartTwoResult}");
 
+var dayFour = new DayFour();
+var dayFourData = FileHelper.ReadFileToStringList($"{filePath}DayFour.txt");
+var dayFourPartOneResult = dayFour.PartOne(dayFourData);
+
+Console.WriteLine("Day Four - Part one:");
+Console.WriteLine($"{dayFourPartOneResult}");
+
+var dayFourPartTwoResult = dayFour.PartTwo(dayFourData);
+
+Console.WriteLine("Day Four - Part two:");
+Console.WriteLine($"{dayFourPartTwoResult}");
+
 Console.ReadLine();
