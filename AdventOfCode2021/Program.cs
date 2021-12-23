@@ -46,7 +46,7 @@ Console.WriteLine("Day Three - Part two:");
 Console.WriteLine($"{dayThreePartTwoResult}");
 
 var dayFour = new DayFour();
-var dayFourData = FileHelper.ReadFileToStringList($"{filePath}DayFour.txt");
+var dayFourData = FileHelper.ReadFileToBingo($"{filePath}DayFour.txt");
 var dayFourPartOneResult = dayFour.PartOne(dayFourData);
 
 Console.WriteLine("Day Four - Part one:");

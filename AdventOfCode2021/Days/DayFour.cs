@@ -1,13 +1,15 @@
+using AdventOfCode2021.Core.Models;
+
 namespace AdventOfCode2021.Days;
 
 public class DayFour
 {
-    public int PartOne(IEnumerable<string> data)
+    public int PartOne(DayFourModel data)
     {
         return 0;
     }
 
-    public int PartTwo(IEnumerable<string> data)
+    public int PartTwo(DayFourModel data)
     {
         return 0;
     }
