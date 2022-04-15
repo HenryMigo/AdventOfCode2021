@@ -20,28 +20,25 @@ public static class FileHelper
 
     public static DayFourModel ReadFileToBingo(string fileLocation)
     {
-        var data = File.ReadLines(fileLocation).ToList();
-        var inputs = data[0].Split(',').ToList();
-        var dayFourModel = new DayFourModel(inputs,new List<DayFourBoardModel>());
+        var boards = new List<List<List<int>>>();
 
-        for (var i = 1; i < data.Count; i += 6)
+        var data = File.ReadLines(fileLocation).ToList();
+        var numberOfBoards = (data.Count - 1) / 6;
+
+        var drawNumbers = data[0].Split(',').Select(int.Parse).ToList();
+        
+        for (var i = 0; i < numberOfBoards; i++)
         {
-            if (data[i] == string.Empty)
+            var board = new List<List<int>>();
+
+            for(var row = 0; row < 5; row++)
             {
-                dayFourModel.Boards.Add(new DayFourBoardModel
-                (
-                    new List<string>
-                    {
-                        data[i + 1],
-                        data[i + 2],
-                        data[i + 3],
-                        data[i + 4],
-                        data[i + 5]
-                    }
-                ));
+                board.Add(data[2 + 6 * i + row].Split().Where(x => x.Trim() != string.Empty).Select(int.Parse).ToList());
             }
+
+            boards.Add(board);
         }
 
-        return dayFourModel;
+        return new DayFourModel(drawNumbers, boards);
     }
 }

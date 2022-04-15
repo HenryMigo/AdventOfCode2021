@@ -1,7 +1,7 @@
 ﻿using AdventOfCode2021.Days;
 using AdventOfCode2021.Core;
 
-var filePath = "/media/henrymigo/New Volume/dev/AdventOfCode2022/Files/";
+var filePath = "/dev/AdventOfCode2022/Files/";
 
 var dayOne = new DayOne();
 var dayOneData = FileHelper.ReadFileToIntArray($"{filePath}DayOne.txt");
@@ -46,7 +46,7 @@ Console.WriteLine("Day Three - Part two:");
 Console.WriteLine($"{dayThreePartTwoResult}");
 
 var dayFour = new DayFour();
-var dayFourData = FileHelper.ReadFileToBingo($"{filePath}DayFourTest.txt");
+var dayFourData = FileHelper.ReadFileToBingo($"{filePath}DayFour.txt");
 var dayFourPartOneResult = dayFour.PartOne(dayFourData);
 
 Console.WriteLine("Day Four - Part one:");
