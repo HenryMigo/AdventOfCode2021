@@ -6,14 +6,14 @@ using Xunit;
 namespace AdventOfCode2021.Tests;
 public class DayTwoTests
 {
-    private const string filePath = "/dev/AdventOfCode2022/Files/DayTwo.txt";
+    private const string filePath = "/dev/AdventOfCode2022/AdventOfCode2021/Files/DayTwo.txt";
 
     [Fact]
     public void PartOne()
     {
         // Arrange
         var dayTwo = new DayTwo();
-        var dayTwoData = FileHelper.ReadFileToStringList($"{filePath}");
+        var dayTwoData = FileHelper.ReadFileToStringList(filePath);
         var dayTwoItems = dayTwo.ConvertToModels(dayTwoData);
         
         // Act
@@ -28,7 +28,7 @@ public class DayTwoTests
     {
         // Arrange
         var dayTwo = new DayTwo();
-        var dayTwoData = FileHelper.ReadFileToStringList($"{filePath}");
+        var dayTwoData = FileHelper.ReadFileToStringList(filePath);
         var dayTwoItems = dayTwo.ConvertToModels(dayTwoData);
 
         // Act

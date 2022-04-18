@@ -7,14 +7,14 @@ using Xunit;
 namespace AdventOfCode2021.Tests;
 public class DayOneTests
 {
-    private const string filePath = "/dev/AdventOfCode2022/Files/DayOne.txt";
+    private const string filePath = "/dev/AdventOfCode2022/AdventOfCode2021/Files/DayOne.txt";
 
     [Fact]
     public void PartOne()
     {
         // Arrange
         var dayOne = new DayOne();
-        var dayOneData = FileHelper.ReadFileToIntArray($"{filePath}");
+        var dayOneData = FileHelper.ReadFileToIntArray(filePath);
 
         var oneData = dayOneData as int[] ?? dayOneData.ToArray();
 
@@ -30,7 +30,7 @@ public class DayOneTests
     {
         // Arrange
         var dayOne = new DayOne();
-        var dayOneData = FileHelper.ReadFileToIntArray($"{filePath}");
+        var dayOneData = FileHelper.ReadFileToIntArray(filePath);
 
         var oneData = dayOneData as int[] ?? dayOneData.ToArray();
 

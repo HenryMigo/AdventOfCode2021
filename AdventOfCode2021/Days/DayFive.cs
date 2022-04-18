@@ -28,10 +28,10 @@ namespace AdventOfCode2021.Days
         {
             foreach (var coordinates in data)
             {
-                if (coordinates.X1 > MaxX) MaxX = coordinates.X1;
-                if (coordinates.Y1 > MaxY) MaxY = coordinates.Y1;
-                if (coordinates.X2 > MaxX) MaxX = coordinates.X2;
-                if (coordinates.Y2 > MaxY) MaxY = coordinates.Y2;
+                if (coordinates.StartX > MaxX) MaxX = coordinates.StartX;
+                if (coordinates.StartY > MaxY) MaxY = coordinates.StartY;
+                if (coordinates.TargetX > MaxX) MaxX = coordinates.TargetX;
+                if (coordinates.TargetY > MaxY) MaxY = coordinates.TargetY;
             }
 
             for (var y = 0; y <= MaxY; y++)
@@ -50,64 +50,51 @@ namespace AdventOfCode2021.Days
         {
             foreach (var coordinates in data)
             {
-                if (coordinates.X1 == coordinates.X2)
+                if (coordinates.StartX == coordinates.TargetX)
                 {
                     CheckVertical(coordinates);
                 }
-                else if (coordinates.Y1 == coordinates.Y2)
+                else if (coordinates.StartY == coordinates.TargetY)
                 {
                     CheckHorizontal(coordinates);
                 }
             }
 
-            var result = 0;
-
-            foreach (var vent in _vents)
-            {
-                foreach (var coordinate in vent)
-                {
-                    Console.Write(coordinate);
-                }
-
-                result += vent.Count(x => x > 1);
-                Console.WriteLine();
-            }
-
-            return result;
+            return _vents.Sum(vent => vent.Count(x => x > 1));
         }
 
         private void CheckHorizontal(DayFiveModel coordinates)
         {
-            if (coordinates.X1 > coordinates.X2)
+            if (coordinates.StartX > coordinates.TargetX)
             {
-                for (var x = coordinates.X1; x > coordinates.X2; x--)
+                for (var x = coordinates.StartX; x >= coordinates.TargetX; x--)
                 {
-                    _vents[x][coordinates.Y1] += 1;
+                    _vents[coordinates.StartY][x] += 1;
                 }
             }
             else
             {
-                for (var x = coordinates.X1; x < coordinates.X2; x++)
+                for (var x = coordinates.StartX; x <= coordinates.TargetX; x++)
                 {
-                    _vents[x][coordinates.Y1] += 1;
+                    _vents[coordinates.StartY][x] += 1;
                 }
             }
         }
 
         private void CheckVertical(DayFiveModel coordinates)
         {
-            if (coordinates.Y1 > coordinates.Y2)
+            if (coordinates.StartY > coordinates.TargetY)
             {
-                for (var y = coordinates.Y1; y > coordinates.Y2; y--)
+                for (var y = coordinates.StartY; y >= coordinates.TargetY; y--)
                 {
-                    _vents[coordinates.X1][y] += 1;
+                    _vents[y][coordinates.StartX] += 1;
                 }
             }
             else
             {
-                for (var y = coordinates.Y1; y < coordinates.Y2; y++)
+                for (var y = coordinates.StartY; y <= coordinates.TargetY; y++)
                 {
-                    _vents[coordinates.X1][y] += 1;
+                    _vents[y][coordinates.StartX] += 1;
                 }
             }
         }
