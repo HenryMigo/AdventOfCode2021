@@ -1,7 +1,6 @@
 ﻿using AdventOfCode2021.Core;
 using AdventOfCode2021.Days;
 using FluentAssertions;
-using System.Linq;
 using Xunit;
 
 namespace AdventOfCode2021.Tests;

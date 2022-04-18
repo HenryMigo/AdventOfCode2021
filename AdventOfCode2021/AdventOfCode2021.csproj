@@ -24,24 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\Files\DayFour.txt">
-        <Link>Files\DayFour.txt</Link>
-      </Content>
-      <Content Include="..\Files\DayFourTest.txt">
-        <Link>Files\DayFourTest.txt</Link>
-      </Content>
-      <Content Include="..\Files\DayOne.txt">
-        <Link>Files\DayOne.txt</Link>
-      </Content>
-      <Content Include="..\Files\DayThree.txt">
-        <Link>Files\DayThree.txt</Link>
-      </Content>
-      <Content Include="..\Files\DayTwo.txt">
-        <Link>Files\DayTwo.txt</Link>
-      </Content>
-      <Content Include="..\Files\DayTwoExample.txt">
-        <Link>Files\DayTwoExample.txt</Link>
-      </Content>
+      <Folder Include="Files\" />
     </ItemGroup>
 
 </Project>
