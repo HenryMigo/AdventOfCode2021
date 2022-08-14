@@ -1,102 +1,41 @@
-﻿using AdventOfCode2021.Core.Models;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode2021.Days
 {
     public class DayFive
     {
-        private List<List<int>> _vents = new List<List<int>>();
-        private int MaxX;
-        private int MaxY;
+        private readonly string filePath = "/dev/AdventOfCode2022/AdventOfCode2021/Files/DayFive.txt";
 
-        public List<DayFiveModel> ToModel(IEnumerable<string> inputs)
+        public int GetCountOfOverlaps(bool includeDiagonals) => File.ReadAllLines(filePath).SelectMany(input =>
         {
-            var list = new List<DayFiveModel>();
+            var range = input.Split(" -> ");
 
-            foreach (var input in inputs)
+            var (x1, y1) = range.First().Split(',').Select(int.Parse).ToArray() switch { var i => (i.First(), i.Last()) };
+            var (x2, y2) = range.Last().Split(',').Select(int.Parse).ToArray() switch { var i => (i.First(), i.Last()) };
+
+            var minX = Math.Min(x1, x2);
+            var maxX = Math.Max(x1, x2) + 1;
+
+            if (x1 != x2 && y1 != y2)
             {
-                var split = input.Split(new[] { "->" }, StringSplitOptions.None).Where(x => x.Trim() != string.Empty).ToList();
-                var initialPoint = split[0].Trim().Split(',').Select(int.Parse).ToList();
-                var targetPoint = split[1].Trim().Split(',').Select(int.Parse).ToList();
+                if (!includeDiagonals) return new List<(int, int)>();
 
-                list.Add(new DayFiveModel(initialPoint[0], initialPoint[1], targetPoint[0], targetPoint[1]));
+                //determine direction of x and y
+                var yPos = y1 < y2;
+                var xPos = x1 < x2;
+
+                return Enumerable.Range(x1, maxX - minX).Select(_ => (xPos ? x1++ : x1--, yPos ? y1++ : y1--));
             }
 
-            return list;
-        }
+            var isHorizontal = x1 == x2;
 
-        public void PopulateBoard(List<DayFiveModel> data)
-        {
-            foreach (var coordinates in data)
-            {
-                if (coordinates.StartX > MaxX) MaxX = coordinates.StartX;
-                if (coordinates.StartY > MaxY) MaxY = coordinates.StartY;
-                if (coordinates.TargetX > MaxX) MaxX = coordinates.TargetX;
-                if (coordinates.TargetY > MaxY) MaxY = coordinates.TargetY;
-            }
+            var minY = Math.Min(y1, y2);
+            var maxY = Math.Max(y1, y2) + 1;
 
-            for (var y = 0; y <= MaxY; y++)
-            {
-                var xList = new List<int>();
-                for (var x = 0; x <= MaxX; x++)
-                {
-                    xList.Add(0);
-                }
+            return Enumerable.Range(isHorizontal ? minY : minX, isHorizontal ? maxY - minY : maxX - minX)
+                .Select(i => isHorizontal ? (minX, i) : (i, minY));
 
-                _vents.Add(xList);
-            }
-        }
+        }).GroupBy(range => range).Count(p => p.Count() >= 2);
 
-        public int PartOne(List<DayFiveModel> data)
-        {
-            foreach (var coordinates in data)
-            {
-                if (coordinates.StartX == coordinates.TargetX)
-                {
-                    CheckVertical(coordinates);
-                }
-                else if (coordinates.StartY == coordinates.TargetY)
-                {
-                    CheckHorizontal(coordinates);
-                }
-            }
-
-            return _vents.Sum(vent => vent.Count(x => x > 1));
-        }
-
-        private void CheckHorizontal(DayFiveModel coordinates)
-        {
-            if (coordinates.StartX > coordinates.TargetX)
-            {
-                for (var x = coordinates.StartX; x >= coordinates.TargetX; x--)
-                {
-                    _vents[coordinates.StartY][x] += 1;
-                }
-            }
-            else
-            {
-                for (var x = coordinates.StartX; x <= coordinates.TargetX; x++)
-                {
-                    _vents[coordinates.StartY][x] += 1;
-                }
-            }
-        }
-
-        private void CheckVertical(DayFiveModel coordinates)
-        {
-            if (coordinates.StartY > coordinates.TargetY)
-            {
-                for (var y = coordinates.StartY; y >= coordinates.TargetY; y--)
-                {
-                    _vents[y][coordinates.StartX] += 1;
-                }
-            }
-            else
-            {
-                for (var y = coordinates.StartY; y <= coordinates.TargetY; y++)
-                {
-                    _vents[y][coordinates.StartX] += 1;
-                }
-            }
-        }
     }
 }
