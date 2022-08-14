@@ -1,9 +1,10 @@
 ﻿using AdventOfCode2021.Days;
 
-var daySix = new DaySix();
+var daySeven = new DaySeven();
+const string testData = "16,1,2,0,4,2,7,1,2,14";
 
-var amount = daySix.GetTotalAmount(256);
+var data = File.ReadLines(@"/dev/AdventOfCode2021/AdventOfCode2021/Files/DaySeven.txt").ToArray();
 
-Console.WriteLine(amount);
+daySeven.GetCheapestFuelCost(data[0]);
 
 Console.ReadLine();
