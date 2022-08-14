@@ -1,15 +1,9 @@
 ﻿using AdventOfCode2021.Days;
-using AdventOfCode2021.Core;
 
-var filePath = "/dev/AdventOfCode2022/AdventOfCode2021/Files/";
+var daySix = new DaySix();
 
-var dayFive = new DayFive();
-var data = FileHelper.ReadFileToStringList($"{filePath}DayFive.txt");
-var commands = dayFive.ToModel(data);
-dayFive.PopulateBoard(commands);
+var amount = daySix.GetTotalAmount(256);
 
-var result = dayFive.PartOne(commands);
-
-Console.WriteLine($"Result: {result}");
+Console.WriteLine(amount);
 
 Console.ReadLine();
